@@ -45,7 +45,7 @@ def process(bot, chat_id, parsedCommand, messageText, currentMessage, update, in
         try:
             chatInstanceArray[chat_id]['checking'] = True
         except Exception:
-            chatInstanceArray[chat_id] = {'checking': True} #place any information you want to keep track of during this instance here, it is indexed by chat_id
+            chatInstanceArray[chat_id] = {'checking': True, 'count': 0} #place any information you want to keep track of during this instance here, it is indexed by chat_id
 
 
         #COMMANDS GO HERE
@@ -55,6 +55,15 @@ def process(bot, chat_id, parsedCommand, messageText, currentMessage, update, in
 
         if parsedCommand == "/ping":
             sendText("pong")
+
+        elif parsedCommand == "/count":
+            incrementBy = 1
+            try:
+                incrementBy = int(messageText.split()[1])
+            except Exception:
+                pass
+            chatInstanceArray[chat_id]['count'] += incrementBy
+            sendText("Count = " + str(chatInstanceArray[chat_id]['count']))
 
         elif parsedCommand == "/image":
             sendPhoto("testimage.png")
@@ -81,7 +90,7 @@ def process(bot, chat_id, parsedCommand, messageText, currentMessage, update, in
             response += "/customkeyboard - sends a custom keyboard\n"
             response += "/killkeyboard - removes a custom keyboard\n"
             response += "/unspammable - cannot use more than once per 15 seconds\n"
-            response += "add more commands here"
+            response += "/count (n) - add n to count, or just 1\n"
 
             sendText(response)
 

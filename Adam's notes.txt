@@ -1,0 +1,27 @@
+bot - the bot itself, used for sendText and such (probably don't touch)
+chat_id - the chat_id where the message received came from, used in sendText, abstracted away from you
+parsedCommand - the first "word", always either @botName, or /command
+messageText - the ENTIRE message text, ie "/btc shop consumables"
+	- use python's string.split() method to get each individual word
+	- ie l = messageText.split() #now l = ["/btc", "shop", "consumables"]
+	- l[0] = "/btc"
+	- usage: "/items 5"
+	- int(messageText.split()[1]), returns 5
+update - the ENTIRE message update, used for fancy things
+instanceAge - used in ATB for /age, can probably ignore
+--
+python dict:
+myDict[7823645892] = 'hi'
+myDict[...], will return 'hi'
+I use this with chat_ids, which are unique to chats.
+
+Thus, chatInstanceArray[chat_id]
+Defined in each chat as (by default):
+{'checking': True}
+to add things (ie, a count variable), add this:
+{'checking': True, 'count': 0}
+
+Now, this is only saved as long as the bot is running. If you want to save past that,
+save to a csv or something.
+
+reference count like: chatInstanceArray[chat_id]['count']

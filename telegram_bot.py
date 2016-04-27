@@ -21,7 +21,8 @@ bot = telegram.Bot(token=APIKEY)
 updates = {}
 currentMessage = {}
 
-print "Telegram Bot Welcome Message"
+print "Welcome to KevinTestBot"
+print "KevinTestBot designed by Kevin Quigley"
 print "Framework by Adam Gincel"
 
 newestOffset = 0
